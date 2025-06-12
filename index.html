@@ -162,43 +162,44 @@
   <div class="hero-body" style="padding-top: 0; padding-bottom: 2rem;">
     <div class="container is-max-desktop has-text-centered">
 
-      <!-- TL;DR -->
-      <div style="margin-bottom: 1.5rem;">
-        <h2 class="title is-4" style="color: darkred; margin-bottom: 0.5rem;">TL;DR</h2>
-        <p style="font-size: 18px; margin-bottom: 0;">
-          Attention perturbation guidance at the head level reveals highly diverse and, in some cases, interpretable behaviors. This enables improvements in image quality, style enhancement, and human preference alignment through the selective use of relevant heads.
-        </p>
-      </div>
-
-      <!-- Motivation Image + Caption -->
-      <div style="margin-bottom: 2rem;">
+      <!-- Motivation -->
+      <div style="margin-bottom: 3rem;">
+        <h2 class="title is-3" style="margin-bottom: 1rem;">Motivation</h2>
         <img src="img/motivation.jpg" style="display: block; margin: 0 auto; max-width: 90%;">
         <h2 class="subtitle" style="margin-top: 0.75rem;">
           Attention perturbation guidance exhibits highly diverse effects depending on the perturbed heads, with some heads showing interpretable characteristics.
         </h2>
       </div>
+    </div>
+  </div>
+</section>
 
-      <!-- Head Combination Image + Caption -->
-      <div style="margin-bottom: 2rem;">
+<section class="section is-light">
+  <div class="container is-max-desktop has-text-centered">
+    <!-- Head Combination -->
+    <div style="margin-bottom: 3rem;">
+      <h2 class="title is-3" style="margin-bottom: 1rem;">Head Combination</h2>
         <img src="img/head_combination.jpg" style="display: block; margin: 0 auto; max-width: 90%;">
         <h2 class="subtitle" style="margin-top: 0.75rem;">
           Combining perturbed heads results in a composition of their corresponding visual concepts.
         </h2>
       </div>
+  </div>
+</section>
 
-      <!-- Teaser Image + Caption -->
-      <div>
-        <img src="img/teaser_qual.jpg" style="display: block; margin: 0 auto; width: 80%;">
+<section class="section">
+  <div class="container is-max-desktop has-text-centered">
+    <!-- HeadHunter -->
+    <div>
+      <h2 class="title is-3" style="margin-bottom: 1rem;">HeadHunter</h2>
+        <img src="img/teaser_qual.jpg" style="display: block; margin: 0 auto; width: 60%;">
         <h2 class="subtitle" style="margin-top: 0.75rem;">
           By selecting attention heads aligned with the target objective, sampling can be effectively steered toward user-defined goals.
         </h2>
       </div>
-
     </div>
   </div>
 </section>
-
-
 
 <section class="section hero is-light">
   <div class="container is-max-desktop">
@@ -280,13 +281,13 @@
 
 
 
-<section class="section hero is-light" style="padding-top: 0;">
+<section class="section" style="padding-top: 0;">
   <div class="container is-max-desktop">
 
     <div class="columns is-centered">
       <div class="column is-full-width">
         <h2 class="title is-3 has-text-centered"><br>Quantitative Results</h2>
-        <img src="img/quan_result.jpg" width="100%">
+        <img src="img/quan_result.jpg" width="70%">
 
         <div class="content has-text-justified">
             <strong>Quantitative results of HeadHunter for style-oriented quality improvement.</strong> As more heads accumulates, the generated images progressively align better with the target style and exhibit improved visual quality.
@@ -298,6 +299,23 @@
   </div>
 </section>
 
+<section class="section" style="padding-top: 0;">
+  <div class="container is-max-desktop">
+
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3 has-text-centered"><br>Interplation</h2>
+        <img src="img/interpolation.jpg" width="70%">
+
+        <div class="content has-text-justified">
+          <strong>Generated Images with linear interpolation between attention map A and an identity matrix I.</strong> While increasing u enhances quality up to a point, it eventually results in over-saturation and structural over-simplification.
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
 
 <!-- <section class="section" id="BibTeX">
   <div class="container is-max-desktop content">
