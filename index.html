@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="description"
-        content="Proejct page for  &quot;A Noise is Worth Diffusion Guidance. &quot;">
-  <meta name="keywords" content="Diffusion, Guidance, Noise">
+        content="Proejct page for  &quot;HeadHunter. &quot;">
+  <meta name="keywords" content="Diffusion, Guidance, Head, Attention">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>A Noise is Worth Diffusion Guidance</title>
+  <title>HeadHunter</title>
 
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
@@ -87,50 +87,38 @@
     <div class="container is-max-desktop">
       <div class="columns is-centered">
         <div class="column has-text-centered">
-          <h1 class="title is-1 publication-title">A Noise is Worth Diffusion Guidance</h1>
+          <h1 class="title is-1 publication-title">HeadHunter</h1>
           <div class="is-size-5 publication-authors">
             <span class="author-block">
               <a href="https://github.com/sunovivid/">Donghoon Ahn</a><sup>1,$\bullet$</sup>,</span>
             <span class="author-block">
               <a href="https://scholar.google.com/citations?user=A2PurdIAAAAJ&hl=en">Jiwon Kang</a><sup>1,$\bullet$</sup>,</span>
               <span class="author-block">
-                <a href="https://github.com/lsh83210/">Sanghyun Lee</a><sup>2,$\circ$</sup>,</span>
+                <a href="https://github.com/lsh83210/">Sanghyun Lee</a><sup>3,$\circ$</sup>,</span>
               </span>
+              <span class="author-block">
+                <a href="https://github.com/kwjames98/">Minjae Kim</a><sup>2</sup>,</span>
+              </span>
+            <br>
             <span class="author-block">
               <a href="https://github.com/Min-Jaewon/">Jaewon Min</a><sup>1,$\circ$</sup>,</span>
             </span>
-            <br>
             <span class="author-block">
               <a href="https://scholar.google.com/citations?user=7cyLEQ0AAAAJ&hl=en/">Wooseok Jang</a><sup>1</sup>,</span>
             </span>
             <span class="author-block">
-              <a href="https://github.com/kwjames98/">Minjae Kim</a><sup>1</sup>,</span>
-            </span>
-            <span class="author-block">
-              <a href="https://github.com/HyoungwonCho/">Hyungwon Cho</a><sup>1</sup>,</span>
-            </span>
-            <span class="author-block">
               <a href="https://sayak.dev/">Sayak Paul</a><sup>4</sup>,</span>
             </span>
-            <span class="author-block">
-              <a href="https://github.com/shhh0620/">SeonHwa Kim</a><sup>1</sup>,</span>
-            </span>
-            <br>
-            <span class="author-block">
-              <a href="https://scholar.google.co.kr/citations?user=mqNGNqEAAAAJ&hl=en">Eunju Cha</a><sup>3,†</sup>
-            </span>
-            <span class="author-block">
-              <a href="https://ipa.korea.ac.kr/">Kyong Hwan Jin</a><sup>1,†</sup>
-            </span>
+            <!-- <br> -->
             <span class="author-block">
               <a href="https://cvlab.kaist.ac.kr/members/faculty">Seungryong Kim</a><sup>2,†</sup>
             </span>
           </div>
 
           <div class="is-size-5 publication-authors">
-            <span class="author-block"><sup>1</sup>Korea University</span> &nbsp;&nbsp;
-            <span class="author-block"><sup>2</sup>KAIST</span> &nbsp;&nbsp;
-            <span class="author-block"><sup>3</sup>Sookmyung Women's University</span> &nbsp;&nbsp;
+            <span class="author-block"><sup>1</sup>KAIST AI</span> &nbsp;&nbsp;
+            <span class="author-block"><sup>2</sup>Korea University</span> &nbsp;&nbsp;
+            <span class="author-block"><sup>3</sup>KAIST</span>  &nbsp;&nbsp;
             <span class="author-block"><sup>4</sup>Hugging Face</span>
           </div>
 
@@ -189,7 +177,7 @@
       <div class="column is-four-fifths">
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified" style="font-size: 18px;">
-          Diffusion models excel in generating high-quality images. However, current diffusion models struggle to produce reliable images without guidance methods, such as classifier-free guidance (CFG). Are guidance methods truly necessary? Observing that noise obtained via diffusion inversion can reconstruct high-quality images without guidance, we focus on the initial noise of the denoising pipeline. By mapping Gaussian noise to `guidance-free noise', we uncover that low-magnitude, low-frequency components significantly enhance the denoising process, removing the need for guidance. Expanding on this, we propose <strong>NoiseRefine</strong>, a novel method that replaces guidance methods with a single refinement of the initial noise. This refined noise enables high-quality image generation without guidance, within the same diffusion pipeline. Our noise-refining model leverages efficient noise-space learning, achieving rapid convergence and strong performance with just 50K text-image pairs. We validate its effectiveness across diverse metrics and analyze how refined noise eliminates the need for guidance.
+          Recent guidance methods in diffusion models steer reverse sampling by perturbing the model to construct an implicit weak model and guide generation away from it. Among these approaches, attention perturbation has demonstrated strong empirical performance in unconditional scenarios where classifier-free guidance is not applicable. However, existing attention perturbation methods lack principled approaches for determining where perturbations should be applied, particularly in Diffusion Transformer (DiT) architectures where quality-relevant computations are distributed across layers. In this paper, we investigate the granularity of attention perturbations, ranging from the layer level down to individual attention heads, and discover that specific heads govern distinct visual concepts such as structure, style, and texture quality. Building on this insight, we propose ``HeadHunter", a systematic framework for iteratively selecting attention heads that align with user-centric objectives, enabling fine-grained control over generation quality and visual attributes. In addition, we introduce SoftPAG, which linearly interpolates each selected head’s attention map toward an identity matrix, providing a continuous knob to tune perturbation strength and suppress artifacts. Our approach not only mitigates the oversmoothing issues of existing layer-level perturbation but also enables targeted manipulation of specific visual styles through compositional head selection. We validate our method on modern large-scale DiT-based text-to-image models including Stable Diffusion 3 and FLUX.1, demonstrating superior performance in both general quality enhancement and style-specific guidance. Our work provides the first head-level analysis of attention perturbation in diffusion models, uncovering interpretable specialization within attention layers and enabling practical design of effective perturbation strategies.
         </div>
       </div>
     </div>
