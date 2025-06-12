@@ -166,7 +166,7 @@
       <div class="has-text-centered" style="margin-bottom: 1em;">
         <h2 class="title is-4" style="color: darkred;">TL;DR</h2>
         <p style="font-size: 18px;">
-          <strong>NoiseRefine</strong> improves image quality in guidance-free diffusion generation by learning to transform initial noise into a more meaningful latent space, enabling high-quality synthesis without relying on classifier-free guidance.
+          <strong>Attention perturbation guidance at the head level reveals highly diverse and, in some cases, interpretable behaviors. This enables improvements in image quality, style enhancement, and human preference alignment through the selective use of relevant heads.
         </p>
       </div>
 
@@ -183,7 +183,7 @@
       </h2>
 
       <!-- Teaser Image + Caption -->
-      <img src="img/teaser_qual.jpg" class="center">
+      <img src="img/teaser_qual.jpg" class="center" width="80%">
       <h2 class="subtitle has-text-centered">
         <br>By selecting attention heads aligned with the target objective, sampling can be effectively steered toward user-defined goals.
       </h2>
@@ -199,7 +199,7 @@
       <div class="column is-four-fifths">
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified" style="font-size: 18px;">
-          Recent guidance methods in diffusion models steer reverse sampling by perturbing the model to construct an implicit weak model and guide generation away from it. Among these approaches, attention perturbation has demonstrated strong empirical performance in unconditional scenarios where classifier-free guidance is not applicable. However, existing attention perturbation methods lack principled approaches for determining where perturbations should be applied, particularly in Diffusion Transformer (DiT) architectures where quality-relevant computations are distributed across layers. In this paper, we investigate the granularity of attention perturbations, ranging from the layer level down to individual attention heads, and discover that specific heads govern distinct visual concepts such as structure, style, and texture quality. Building on this insight, we propose ``HeadHunter", a systematic framework for iteratively selecting attention heads that align with user-centric objectives, enabling fine-grained control over generation quality and visual attributes. In addition, we introduce SoftPAG, which linearly interpolates each selected head’s attention map toward an identity matrix, providing a continuous knob to tune perturbation strength and suppress artifacts. Our approach not only mitigates the oversmoothing issues of existing layer-level perturbation but also enables targeted manipulation of specific visual styles through compositional head selection. We validate our method on modern large-scale DiT-based text-to-image models including Stable Diffusion 3 and FLUX.1, demonstrating superior performance in both general quality enhancement and style-specific guidance. Our work provides the first head-level analysis of attention perturbation in diffusion models, uncovering interpretable specialization within attention layers and enabling practical design of effective perturbation strategies.
+          Recent guidance methods in diffusion models steer reverse sampling by perturbing the model to construct an implicit weak model and guide generation away from it. Among these approaches, attention perturbation has demonstrated strong empirical performance in unconditional scenarios where classifier-free guidance is not applicable. However, existing attention perturbation methods lack principled approaches for determining where perturbations should be applied, particularly in Diffusion Transformer (DiT) architectures where quality-relevant computations are distributed across layers. In this paper, we investigate the granularity of attention perturbations, ranging from the layer level down to individual attention heads, and discover that specific heads govern distinct visual concepts such as structure, style, and texture quality. Building on this insight, we propose “HeadHunter", a systematic framework for iteratively selecting attention heads that align with user-centric objectives, enabling fine-grained control over generation quality and visual attributes. In addition, we introduce SoftPAG, which linearly interpolates each selected head’s attention map toward an identity matrix, providing a continuous knob to tune perturbation strength and suppress artifacts. Our approach not only mitigates the oversmoothing issues of existing layer-level perturbation but also enables targeted manipulation of specific visual styles through compositional head selection. We validate our method on modern large-scale DiT-based text-to-image models including Stable Diffusion 3 and FLUX.1, demonstrating superior performance in both general quality enhancement and style-specific guidance. Our work provides the first head-level analysis of attention perturbation in diffusion models, uncovering interpretable specialization within attention layers and enabling practical design of effective perturbation strategies.
         </div>
       </div>
     </div>
@@ -207,7 +207,7 @@
 </section>
 
 
-<section class="section">
+<!-- <section class="section">
   <div class="container is-max-desktop">
 
     <div class="columns is-centered has-text-centered">
@@ -223,13 +223,14 @@
       </div>
     </div>
   </div>
-</section>
+</section> -->
 
-<section class="hero is-light">
+<section class="section">
   <div class="hero-body" style="padding: 0;">
     <div class="container is-max-desktop has-text-centered">
       <h2 class="title is-3" style="margin-top: 10px;">Qualitative Results</h2>
-      <div id="carouselVideoReconstruction" class="carousel" data-slides-to-show=1 data-slides-to-scroll=1 data_auto_play="true">
+      <div id="carouselVideoReconstruction" class="carousel" data-slides-to-show="1" data-slides-to-scroll="1" data_auto_play="true">
+        
         <div class="item">
           <img src="qual/qual1.webp">
         </div>
@@ -245,12 +246,33 @@
         <div class="item">
           <img src="qual/qual5.webp">
         </div>
+        <div class="item">
+          <img src="qual/qual6.webp">
+        </div>
+        <div class="item">
+          <img src="qual/qual7.webp">
+        </div>
+        <div class="item">
+          <img src="qual/qual8.webp">
+        </div>
+        <div class="item">
+          <img src="qual/qual9.webp">
+        </div>
+        <div class="item">
+          <img src="qual/qual10.webp">
+        </div>
+        <div class="item">
+          <img src="qual/qual11.webp">
+        </div>
+        
+      </div>
     </div>
   </div>
 </section>
 
 
-<section class="section" style="padding-top: 0;">
+
+<section class="section hero is-light" style="padding-top: 0;">
   <div class="container is-max-desktop">
 
     <div class="columns is-centered">
