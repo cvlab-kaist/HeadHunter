@@ -87,7 +87,7 @@
     <div class="container is-max-desktop">
       <div class="columns is-centered">
         <div class="column has-text-centered">
-          <h1 class="title is-1 publication-title">HeadHunter</h1>
+          <h1 class="title is-1 publication-title">Fine-Grained Perturbation Guidance via Attention Head Selection and Interpolation</h1>
           <div class="is-size-5 publication-authors">
             <span class="author-block">
               <a href="https://github.com/sunovivid/">Donghoon Ahn</a><sup>1,$\bullet$</sup>,</span>
@@ -131,17 +131,17 @@
             <div class="publication-links">
               <!-- PDF Link. -->
               <span class="link-block">
-                <a href="https://arxiv.org/abs/2412.03895"
+                <a href=""
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="fas fa-file-pdf"></i>
                   </span>
-                  <span>Paper</span>
+                  <span>Paper (coming soon)</span>
                 </a>
               </span>
               <!-- Code Link. -->
               <span class="link-block">
-                <a href="https://github.com/cvlab-kaist/NoiseRefine"
+                <a href="https://github.com/cvlab-kaist/HeadHunter"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="fab fa-github"></i>
@@ -161,9 +161,31 @@
 <section class="hero teaser">
   <div class="container is-max-desktop">
     <div class="hero-body">
-      <img src="img/teaser.jpeg" class="center">
-      <h2 class="subtitle has-text-centered" >
-        <br>Diffusion models often fail to generate high-quality images without guidance, such as classifier-free guidance. We propose <strong>NoiseRefine</strong>, a novel approach to improve image quality in guidance-free generation by learning to map initial noise to a guidance-free noise space.
+
+      <!-- TL;DR -->
+      <div class="has-text-centered" style="margin-bottom: 1em;">
+        <h2 class="title is-4" style="color: darkred;">TL;DR</h2>
+        <p style="font-size: 18px;">
+          <strong>NoiseRefine</strong> improves image quality in guidance-free diffusion generation by learning to transform initial noise into a more meaningful latent space, enabling high-quality synthesis without relying on classifier-free guidance.
+        </p>
+      </div>
+
+      <!-- Motivation Image + Caption -->
+      <img src="img/motivation.jpg" class="center">
+      <h2 class="subtitle has-text-centered">
+        <br>Attention perturbation guidance exhibits highly diverse effects depending on the perturbed heads, with some heads showing interpretable characteristics.
+      </h2>
+
+      <!-- Teaser Image + Caption -->
+      <img src="img/head_combination.jpg" class="center">
+      <h2 class="subtitle has-text-centered">
+        <br>Combining perturbed heads results in a composition of their corresponding visual concepts.
+      </h2>
+
+      <!-- Teaser Image + Caption -->
+      <img src="img/teaser_qual.jpg" class="center">
+      <h2 class="subtitle has-text-centered">
+        <br>By selecting attention heads aligned with the target objective, sampling can be effectively steered toward user-defined goals.
       </h2>
     </div>
   </div>
