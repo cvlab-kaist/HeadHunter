@@ -902,7 +902,7 @@ pre {
 
 .title-video {
   height: 3rem;
-  width: 3rem;
+  width: 4rem;
   object-fit: cover;
   box-shadow: none; /* remove box feel */
   flex: 0 0 auto;

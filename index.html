@@ -201,7 +201,7 @@
             <div class="tldr" style="text-align: center;">
                 <b>TL;DR</b> 
                 <br> 
-                When <strong>attention perturbation guidance</strong> is applied <strong>at the level of individual heads</strong>, 
+                When <strong>attention perturbation guidance</strong> (e.g. PAG) is applied <strong>at the level of individual heads</strong>, 
                 <br> 
                 the resulting <strong>effects vary significantly across heads</strong>, with some exhibiting interpretable characteristics. 
                 <br>
@@ -216,7 +216,7 @@
                     <!-- <h3>🌟 Why HeadHunter?</h3> -->
                      <br>
                     <ul>
-                        <li><b>Fine-grained control:</b> Each attention head specializes in different concepts (e.g., structure, lighting, texture, style). By targeting only the right heads, we can boost image quality or enhance specific styles without unwanted side effects.</li><br>
+                        <li><b>Fine-grained control:</b> Each attention head specializes in different concepts (e.g., structure, lighting, texture, style). By targeting only the right heads to perturb, we can boost image quality or enhance specific styles.</li><br>
                         <li><b>Compositional power:</b> Multiple heads can be combined, letting us compose visual effects like “lighting + texture” or “geometry + style.” This creates a plug-and-play style control mechanism at inference time.</li><br>
                         <li><b>Objective-aware guidance:</b> HeadHunter works iteratively with arbitrary objective (human preference, style alignment, etc.). It automatically finds the best set of heads in an iterative manner to achieve the goal.</li><br>
                     </ul>
@@ -226,7 +226,7 @@
             
 
             <section id="combinational-property" class="section">
-                <h2>Combinational property of <span class="gradient-text">head-level guidance</span></h2>
+                <h2>💓 Combinational property of <span class="gradient-text">head-level guidance</span></h2>
                 <div class="image-container">
 
                     <div class="caption-list">
@@ -251,7 +251,7 @@
 
 
             <section id="headhunter-framework" class="section">
-                <h2><span class="gradient-text">HeadHunter</span> : Iterative head-search framework for image boosting</h2>
+                <h2>🎯 <span class="gradient-text">HeadHunter</span> : Iterative head-search framework for boosting</h2>
 
                 <p class="image-caption">We showcase that <strong> selecting heads step by step boost the style specified in the prompt</strong>, <br> guiding the model toward stronger stylistic expression. <br> Watch how the style intensifies with each iteration!</p>
                 
