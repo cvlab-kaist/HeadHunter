@@ -1,376 +1,526 @@
-<!DOCTYPE html>
 <html>
+
 <head>
-  <meta charset="utf-8">
-  <meta name="description"
-        content="Proejct page for  &quot;Fine-Grained Perturbation Guidance via Attention Head Selection &quot;">
-  <meta name="keywords" content="Diffusion, Guidance, Head, Attention">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Fine-Grained Perturbation Guidance via Attention Head Selection</title>
+    <meta charset="utf-8">
+    <meta name="description"
+            content="Project page for  &quot;Fine-Grained Perturbation Guidance via Attention Head Selection &quot;">
+    <meta name="keywords" content="Diffusion, Guidance, Head, Attention">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>HeadHunter: Fine-Grained Perturbation Guidance via Attention Head Selection</title>
 
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
 
-    function gtag() {
-      dataLayer.push(arguments);
-    }
+    <meta
+        content="Fine-Grained Perturbation Guidance via Attention Head Selection"
+        name="description" />
+    <meta
+        content="Fine-Grained Perturbation Guidance via Attention Head Selection"
+        property="og:title" />
+    <meta
+        content="Fine-Grained Perturbation Guidance via Attention Head Selection"
+        property="og:description" />
+    <meta
+        content="Fine-Grained Perturbation Guidance via Attention Head Selection"
+        property="twitter:title" />
+    <meta
+        content="Fine-Grained Perturbation Guidance via Attention Head Selection"
+        property="twitter:description" />
+    <meta property="og:type" content="website" />
+    <meta content="summary_large_image" name="twitter:card" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css"
+        crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&family=Varela+Round&display=swap"
+        rel="stylesheet">
+    <link href="style.css?" rel="stylesheet" type="text/css" />
 
-    gtag('js', new Date());
+    <!-- 🔎 Added minimal CSS for click‑to‑zoom lightbox -->
+    <style>
+      /* make images clearly zoomable */
+      img.zoomable { cursor: zoom-in; transition: transform .2s ease; }
 
-    gtag('config', 'G-PYVRSFMDRL');
-  </script>
+      /* fullscreen overlay */
+      .lightbox-overlay { 
+        position: fixed; inset: 0; display: none; align-items: center; justify-content: center;
+        background: rgba(0,0,0,.9); z-index: 10000; 
+      }
+      .lightbox-overlay.active { display: flex; }
+      .lightbox-overlay img { max-width: 95vw; max-height: 95vh; box-shadow: 0 10px 40px rgba(0,0,0,.6); border-radius: 8px; }
+      /* show zoom-out cursor while overlay is open */
+      .lightbox-overlay, .lightbox-overlay * { cursor: zoom-out; }
 
-  <link href="./static/css/sans.css" rel="stylesheet">
+      /* prevent background scroll when overlay is open */
+      body.no-scroll { overflow: hidden; }
+    </style>
 
-  <link rel="stylesheet" href="./static/css/bulma.min.css">
-  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
-  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
-  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
-  <link rel="stylesheet" href="./static/css/index.css">
-  <link rel="stylesheet" href="./static/css/selection-panel.css">
-  <link rel="icon" href="./static/images/favicon.svg">
-
-  <script src="./static/js/jquery.min.js"></script>
-  <script defer src="./static/js/fontawesome.all.min.js"></script>
-  <script src="./static/js/bulma-carousel.min.js"></script>
-  <script src="./static/js/bulma-slider.min.js"></script>
-  <script src="./static/js/index.js"></script>
+    <!-- MathJax for LaTeX rendering -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$','$'], ['\\(','\\)']],
+                displayMath: [['$$','$$'], ['\\[','\\]']]
+            },
+            options: {
+                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+            },
+            svg: { fontCache: 'global' }
+        };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
 </head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-RPFQD0WBDP"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-RPFQD0WBDP');
-</script>
-  
-<!-- Mathjax -->
-<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-<script>
-    window.MathJax = {
-     tex: {
-       inlineMath: [['$', '$'], ['\\(', '\\)']]
-     }
-   };
-</script>
 
 <body>
-
-<nav class="navbar" role="navigation" aria-label="main navigation">
-  <div class="navbar-brand">
-    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-    </a>
-  </div>
-  <div class="navbar-menu">
-    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
-      <a class="navbar-item" href="https://cvlab-kaist.github.io/NoiseRefine">
-      <span class="icon">
-          <i class="fas fa-home"></i>
-      </span>
-      </a>
-
-      <div class="navbar-item has-dropdown is-hoverable">
-        <a class="navbar-link">
-          Related Work
-        </a>
-        <div class="navbar-dropdown">
-          <a class="navbar-item" href="https://cvlab-kaist.github.io/Perturbed-Attention-Guidance/">Perturbed-Attention Guidance</a>
+    <header class="site-header">
+        <div class="container">
+            <nav class="main-nav">
+                <ul class="nav-links">
+                    <li><a href="#overview">Overview</a></li>
+                    <li><a href="#motivation">Why Headhunter?</a></li>
+                    <li><a href="#combinational-property">Head Combination</a></li>
+                    <li><a href="#headhunter-framework">HeadHunter</a></li>
+                    <li><a href="#quantitative-results">Quantitative Results</a></li>
+                    <li><a href="#softpag">SoftPAG</a></li>
+                    <li><a href="#citation">Citation</a></li>
+                </ul>
+            </nav>
         </div>
-      </div>
-    </div>
+    </header>
 
-  </div>
-</nav>
-
-
-<section class="hero">
-  <div class="hero-body">
-    <div class="container is-max-desktop">
-      <div class="columns is-centered">
-        <div class="column has-text-centered">
-          <h1 class="title is-1 publication-title">Fine-Grained Perturbation Guidance via Attention Head Selection</h1>
-          <div class="is-size-5 publication-authors">
-            <span class="author-block">
-              <a href="https://github.com/sunovivid/">Donghoon Ahn</a><sup>1$\bullet$</sup>,</span>
-            <span class="author-block">
-              <a href="https://scholar.google.com/citations?user=A2PurdIAAAAJ&hl=en">Jiwon Kang</a><sup>1$\bullet$</sup>,</span>
-            <br>
-            <span class="author-block">
-              <a href="https://github.com/lsh83210/">Sanghyun Lee</a><sup>1$\circ$</sup>,</span>
-            </span>
-            <span class="author-block">
-              <a href="https://github.com/kwjames98/">Minjae Kim</a><sup>2$\circ$</sup>,</span>
-            </span>
-            <span class="author-block">
-              <a href="https://github.com/Min-Jaewon/">Jaewon Min</a><sup>1</sup>,</span>
-            </span>
-            <span class="author-block">
-              <a href="https://scholar.google.com/citations?user=7cyLEQ0AAAAJ&hl=en/">Wooseok Jang</a><sup>1</sup>,</span>
-            </span>
-            <br>
-            <span class="author-block">
-              <a href="https://www.linkedin.com/in/sangwulee/">Sangwu Lee</a><sup>3</sup>,</span>
-            </span>
-            <span class="author-block">
-              <a href="https://sayak.dev/">Sayak Paul</a><sup>4</sup>,</span>
-            </span>
-            <span class="author-block">
-              <a href="https://susunghong.github.io/">Susung Hong</a><sup>5</sup>,</span>
-            </span>
-            <span class="author-block">
-              <a href="https://cvlab.kaist.ac.kr/members/faculty">Seungryong Kim</a><sup>1†</sup>
-            </span>
-          </div>
-
-          <div class="is-size-5 publication-authors">
-            <span class="author-block"><sup>1</sup>KAIST AI</span> &nbsp;&nbsp;
-            <span class="author-block"><sup>2</sup>Korea University</span>  &nbsp;&nbsp;
-            <br>
-            <span class="author-block"><sup>3</sup>Krea AI</span> &nbsp;&nbsp;
-            <span class="author-block"><sup>4</sup>Hugging Face</span> &nbsp;&nbsp;
-            <span class="author-block"><sup>5</sup>University of Washington</span>
-          </div>
-
-          <div class="is-size-10 publication-authors">
-            <span class="author-block"><sup>$\bullet$ $\circ$ </sup>Equal Contribution,</span>
-            <span class="author-block"><sup>†</sup>Co-corresponding Author</span>
-          </div>
-
-          <div class="column has-text-centered">
-            <div class="publication-links">
-              <!-- PDF Link. -->
-              <span class="link-block">
-                <a href="https://arxiv.org/abs/2506.10978"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="fas fa-file-pdf"></i>
-                  </span>
-                  <span>Paper</span>
-                </a>
-              </span>
-              <!-- Code Link. -->
-              <span class="link-block">
-                <a href="https://github.com/cvlab-kaist/HeadHunter"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="fab fa-github"></i>
-                  </span>
-                  <span>Code (coming soon)</span>
-                  </a>
-              </span>
+    <div class="hero-section">
+        <div class="container">
+            <div class="title-row">
+                <div class="title-flex">
+                    <video class="title-video" autoplay muted loop playsinline>
+                        <!-- <source src="images/robot_alpha.webm" type="video/webm"> -->
+                        <source src="img/Cute_Headhunter_Icon_Animation.mp4" type="video/mp4">
+                    </video>
+                    <div class="title-text-block">
+                        <h1 class="title"><span class="gradient-text">HeadHunter</span>: Fine-Grained Perturbation Guidance<span class="title-break"></span> via Attention Head Selection</h1>
+                        <h1 class="subtitle">NeurIPS 2025</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="base-row author-row">
+                <div class="base-col author-col">
+                    <a href="https://github.com/sunovivid/" target ="_blank" class="author-text">
+                        Donghoon Ahn<sup>1●</sup>
+                    </a>
+                </div>
+                <div class="base-col author-col">
+                    <a href="https://scholar.google.com/citations?user=A2PurdIAAAAJ&hl=en" target="_blank" class="author-text">
+                        Jiwon Kang<sup>1●</sup>
+                    </a>
+                </div> 
+            </div>
+            <div class="base-row author-row">
+                <div class="base-col author-col">
+                    <a href="https://github.com/lsh83210/" target="_blank" class="author-text">
+                        Sanghyun Lee<sup>1○</sup>
+                    </a>
+                </div>
+                <div class="base-col author-col">
+                    <a href="https://github.com/kwjames98/" target="_blank" class="author-text">
+                        Minjae Kim<sup>2○</sup>
+                    </a>
+                </div>
+                <div class="base-col author-col">
+                    <a href="https://github.com/Min-Jaewon/" target="_blank" class="author-text">
+                        Jaewon Min<sup>1</sup>
+                    </a>
+                </div>
+            </div>
+            <div class="base-row author-row">
+                <div class="base-col author-col">
+                    <a href="https://scholar.google.com/citations?user=7cyLEQ0AAAAJ&hl=en/" target="_blank" class="author-text">
+                        Wooseok Jang<sup>1</sup>
+                    </a>
+                </div>
+                <div class="base-col author-col">
+                    <a href="https://www.linkedin.com/in/sangwulee/" target="_blank" class="author-text">
+                        Sangwu Lee<sup>3</sup>
+                    </a>
+                </div>
+                <div class="base-col author-col">
+                    <a href="https://sayak.dev/" target="_blank" class="author-text">
+                        Sayak Paul<sup>4</sup>
+                    </a>
+                </div>
+                <div class="base-col author-col">
+                    <a href="https://susunghong.github.io/" target="_blank" class="author-text">
+                        Susung Hong<sup>5</sup>
+                    </a>
+                </div>
+                <div class="base-col author-col">
+                    <a href="https://cvlab.kaist.ac.kr/members/faculty" target="_blank" class="author-text">
+                        Seungryong Kim<sup>1†</sup>
+                    </a>
+                </div>
             </div>
 
-          </div>
+            <div class="base-row author-row">
+                <div class="base-col author-col affiliations">
+                    <sup>1</sup>KAIST AI &nbsp;&nbsp;
+                    <sup>2</sup>Korea University &nbsp;&nbsp;
+                    <sup>3</sup>Krea AI &nbsp;&nbsp;
+                    <sup>4</sup>Hugging Face &nbsp;&nbsp;
+                    <sup>5</sup>University of Washington
+                    <br>
+                    <sup>● ○ </sup>Equal Contribution, <sup>†</sup>Co-corresponding Author
+                </div>
+            </div>
+            <div class="link-labels base-row">
+                <div class="base-col icon-col"><a href="https://arxiv.org/abs/2506.10978" target="_blank"
+                        class="link-block">
+                        <i class="fa fas fa-file-text main-icon" style="font-size: 60px"></i>
+                        <strong class="link-labels-text">Paper</strong>
+                    </a></div>
+                <div class="base-col icon-col"><a href='https://github.com/cvlab-kaist/HeadHunter' class="link-block">
+                        <i class="fa fa-github main-icon" style="font-size: 60px"></i>
+                        <strong class="link-labels-text">Code</strong>
+                    </a></div>
+                <div class="base-col icon-col"><a href="#citation" class="link-block">
+                        <i class="fa fa-graduation-cap main-icon" style="font-size: 60px"></i>
+                        <strong class="link-labels-text">Citation</strong>
+                    </a></div>
+            </div>
+
         </div>
-      </div>
     </div>
-  </div>
-</section>
 
-<section class="section">
-  <div class="hero-body" style="padding-top: 0;">
-    <div class="container is-max-desktop has-text-centered">
-      <!-- Motivation -->
-        <h2 class="title is-3">Motivation</h2>
-        <img src="img/motivation.jpg" style="display: block; margin: 1.0rem auto; max-width: 100%;">
-        <h2 class="subtitle" style="text-align: center;">
-          <div class="content has-text-justified" style="font-size: 18px;">
-            <ul>
-            <li>In DiT, multi-head self-attention plays a central role in modeling global dependencies.</li>
-            <li>Each head attends to different aspects of the input and often specializes in distinct semantic features.</li>
-            <li>When attention perturbation guidance is applied at the level of individual heads, the <strong>resulting effects vary significantly across heads</strong>, with some exhibiting interpretable characteristics.</li>
-            </ul>
-          </div>
-        </h2>
-    </div>
-  </div>
-</section>
-
-<section class="section hero is-light">
-  <div class="hero-body" style="padding-top: 0;">
-    <div class="container is-max-desktop has-text-centered">
-      <!-- Head Combination -->
-      <h2 class="title is-3">Head Combination</h2>
-      <img src="img/head_combination.png" style="display: block; margin: 0 auto; max-width: 90%;">
-      <h2 class="subtitle" style="text-align: center;">
-        Combining perturbed heads results in a <strong>composition of their corresponding visual concepts</strong>.
-      </h2>
-    </div>
-  </div>
-</section>
-
-<section class="section">
-  <div class="hero-body" style="padding-top: 0;">
-    <div class="container is-max-desktop has-text-centered">
-      <!-- HeadHunter -->
-      <div>
-        <h2 class="title is-3">HeadHunter</h2>
-        <img src="img/teaser_qual.jpg" style="display: block; margin: 0 auto; width: 60%;">
-        <h2 class="subtitle" style="text-align: center;">
-          By selecting attention heads aligned with the target objective, sampling can be effectively steered toward user-defined goals.
-        </h2>
-      </div>
-      </div>
-  </div>
-</section>
-
-<section class="section hero is-light">
-  <div class="container is-max-desktop">
-    <!-- Highlights -->
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Abstract</h2>
-        <div class="content has-text-justified" style="font-size: 18px;">
-          Recent guidance methods in diffusion models steer reverse sampling by perturbing the model to construct an implicit weak model and guide generation away from it. Among these approaches, attention perturbation has demonstrated strong empirical performance in unconditional scenarios where classifier-free guidance is not applicable. However, existing attention perturbation methods lack principled approaches for determining where perturbations should be applied, particularly in Diffusion Transformer (DiT) architectures where quality-relevant computations are distributed across layers. In this paper, we investigate the granularity of attention perturbations, ranging from the layer level down to individual attention heads, and discover that specific heads govern distinct visual concepts such as structure, style, and texture quality. Building on this insight, we propose “HeadHunter", a systematic framework for iteratively selecting attention heads that align with user-centric objectives, enabling fine-grained control over generation quality and visual attributes. In addition, we introduce SoftPAG, which linearly interpolates each selected head’s attention map toward an identity matrix, providing a continuous knob to tune perturbation strength and suppress artifacts. Our approach not only mitigates the oversmoothing issues of existing layer-level perturbation but also enables targeted manipulation of specific visual styles through compositional head selection. We validate our method on modern large-scale DiT-based text-to-image models including Stable Diffusion 3 and FLUX.1, demonstrating superior performance in both general quality enhancement and style-specific guidance. Our work provides the first head-level analysis of attention perturbation in diffusion models, uncovering interpretable specialization within attention layers and enabling practical design of effective perturbation strategies.
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+    <main class="main-content">
 
 
-<!-- <section class="section">
-  <div class="container is-max-desktop">
-
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-full-width">
-        <h2 class="title is-3" style="margin-top: -20px">Architecture</h2>
-
-        <img src="img/architecture.jpeg" class="center" width="60%">
-
-        <div class="content has-text-justified" style="margin-top: 15px; text-align: left; font-size: 18px;">
-          We propose a training methodology to learn a mapping from initial noise to guidance-free noise. Given an initial Gaussian noise \( x_T \), the original diffusion model parameterized by $\theta$ generates an image \( x_{0}^{\text{Guide}} \) using guidance. NoiseRefine refines the initial noise \( x_T \) to produce $\hat{x}_T = g_\phi(x_T)$, which is then input to the original model to generate an image $\hat{x}_0$ without guidance. By minimizing the distance between two images $d(x_{0}^{\text{Guide}}, \hat{x}_0)$, NoiseRefine effectively learns the desired mapping. Note that both NoiseRefine and original model also receive a prompt \( c \) as input, though this is omitted here for simplicity.
-        </div>
-
-      </div>
-    </div>
-  </div>
-</section> -->
-
-<section class="section">
-  <div class="hero-body" style="padding: 0;">
-    <div class="container is-max-desktop has-text-centered">
-      <h2 class="title is-3" style="margin-top: 10px;">Qualitative Results</h2>
-      <div id="carouselVideoReconstruction" class="carousel" data-slides-to-show="1" data-slides-to-scroll="1" data_auto_play="true">
-        
-        <div class="item">
-          <img src="qual/qual1.webp" style="width: 75%;">
-        </div>
-        <div class="item">
-          <img src="qual/qual2.webp" style="width: 75%;">
-        </div>
-        <div class="item">
-          <img src="qual/qual3.webp" style="width: 75%;">
-        </div>
-        <div class="item">
-          <img src="qual/qual4.webp" style="width: 75%;">
-        </div>
-        <div class="item">
-          <img src="qual/qual5.webp" style="width: 75%;">
-        </div>
-        <div class="item">
-          <img src="qual/qual6.webp" style="width: 75%;">
-        </div>
-        <div class="item">
-          <img src="qual/qual7.webp" style="width: 75%;">
-        </div>
-        <div class="item">
-          <img src="qual/qual8.webp" style="width: 75%;">
-        </div>
-        <div class="item">
-          <img src="qual/qual9.webp" style="width: 75%;">
-        </div>
-        <div class="item">
-          <img src="qual/qual10.webp" style="width: 75%;">
-        </div>
-        <div class="item">
-          <img src="qual/qual11.webp" style="width: 75%;">
-        </div>
-
-      </div>
-    </div>
-  </div>
-</section>
+        <div class="container">
+            
+            <div id="motivation" class="image-container">
+                <div class="image-content">
+                    <img src="img/motivation.jpg" class="img large-image" alt="Comparisons diagram">
+            <div class="tldr" style="text-align: center;">
+                <b>TL;DR</b> 
+                <br> 
+                When <strong>attention perturbation guidance</strong> is applied <strong>at the level of individual heads</strong>, 
+                <br> 
+                the resulting <strong>effects vary significantly across heads</strong>, with some exhibiting interpretable characteristics. 
+                <br>
+                By <span class="gradient-text">HeadHunter</span> framework, we can <strong>steer diffusion models </strong> more effectively by <strong>selecting and combining heads</strong>
+            </div>
 
 
+            <div id="overview" class="base-row section">
+                <h2>🌟 Why <span class="gradient-text">HeadHunter</span>?</h2>
+
+                <div class="tldr">
+                    <!-- <h3>🌟 Why HeadHunter?</h3> -->
+                     <br>
+                    <ul>
+                        <li><b>Fine-grained control:</b> Each attention head specializes in different concepts (e.g., structure, lighting, texture, style). By targeting only the right heads, we can boost image quality or enhance specific styles without unwanted side effects.</li><br>
+                        <li><b>Compositional power:</b> Multiple heads can be combined, letting us compose visual effects like “lighting + texture” or “geometry + style.” This creates a plug-and-play style control mechanism at inference time.</li><br>
+                        <li><b>Objective-aware guidance:</b> HeadHunter works iteratively with any objective (human preference, style alignment, etc.). It automatically finds the best heads to achieve that goal, no manual tuning needed.</li><br>
+                    </ul>
+                </div>
+            </div>
+
+            
+
+            <section id="combinational-property" class="section">
+                <h2>Combinational property of <span class="gradient-text">head-level guidance</span></h2>
+                <div class="image-container">
+
+                    <div class="caption-list">
+                        <p class="caption-title"> Each attention head specializes in different visual effects when perturbation guidance is applied</p>
+                        <ul>
+                            <li>💡 One may capture <b>lighting</b> (e.g., golden hour glow).</li>
+                            <li>🎨 Another may encode <b>texture</b> (e.g., glossy, plastic surface).</li>
+                            <li>🌈 Others might emphasize <b>color tones</b> (e.g., warm brown) or <b>shading</b> (e.g., blurred effects).</li>
+                        </ul>
+                        <p class="caption-title">When we combine heads, these effects naturally blend into richer outcomes</p>
+                        <ul>
+                            <li>👉 <b>Golden hour</b> + <b>glossy, plastic picture</b> → a sunset-like scene with a reflective, polished texture.</li>
+                            <li>👉 <b>Blurred brown</b> + <b>sunlight</b> → warm daylight infused with a soft, cinematic tone.</li>
+                        </ul>
+                    </div>
+
+                    <div class="image-content">
+                        <img src="img/head_combination.png" class="img large-image" alt="Head Combination">
+                    </div>
+                </div>
+            </section>
 
 
-<section class="section" style="padding-top: 0;">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered">
-      <div class="column is-full-width">
-        <h2 class="title is-3 has-text-centered">Quantitative Results</h2>
-        <img src="img/quan_result.jpg" style="width: 50%; display: block; margin: 0 auto;">
-        <div class="content has-text-justified">
-          <strong>Quantitative results of HeadHunter for style-oriented quality improvement.</strong> As more heads accumulate, the generated images progressively align better with the target style and exhibit improved visual quality.
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+            <section id="headhunter-framework" class="section">
+                <h2><span class="gradient-text">HeadHunter</span> : Iterative head-search framework for image boosting</h2>
 
-<section class="section hero is-light">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered">
-      <div class="column is-full-width">
-        <h2 class="title is-3 has-text-centered">Interpolation</h2>
+                <p class="image-caption">We showcase that <strong> selecting heads step by step boost the style specified in the prompt</strong>, <br> guiding the model toward stronger stylistic expression. <br> Watch how the style intensifies with each iteration!</p>
+                
+                <div class="slideshow-container">
+                    <div class="slideshow">
+                        <div class="slide">
+                            <img src="img/teaser_qual.jpg"
+                                class="comparison-slideshow-image" alt="Attention analysis">
+                        </div>
+                        <div class="slide">
+                            <img src="qual/qual1.webp"
+                                class="comparison-slideshow-image" alt="Attention analysis">
+                        </div>
+                        
+                        <div class="slide">
+                            <img src="qual/qual2.webp"
+                                class="comparison-slideshow-image" alt="Training efficiency curves">
+                        </div>
 
-        <img src="img/interpolation.png" style="width: 100%; display: block; margin: 0 auto;">
+                        <div class="slide">
+                            <img src="qual/qual3.webp"
+                                class="comparison-slideshow-image" alt="Training efficiency curves">
+                        </div>
 
-        <div class="content has-text-justified" style="margin-top: 1rem;">
-          <strong>Generated images with linear interpolation between attention map A and an identity matrix I.</strong>
-          While increasing <i>u</i> enhances quality up to a point, it eventually results in over-saturation and structural over-simplification.
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+                        <div class="slide">
+                            <img src="qual/qual4.webp"
+                                class="comparison-slideshow-image" alt="Training efficiency curves">
+                        </div>
 
+                        <div class="slide">
+                            <img src="qual/qual5.webp"
+                                class="comparison-slideshow-image" alt="Training efficiency curves">
+                        </div>
 
+                        <div class="slide">
+                            <img src="qual/qual6.webp"
+                                class="comparison-slideshow-image" alt="Training efficiency curves">
+                        </div>
+                        <div class="slide">
+                            <img src="qual/qual7.webp"
+                                class="comparison-slideshow-image" alt="Training efficiency curves">
+                        </div>
+                        <div class="slide">
+                            <img src="qual/qual8.webp"
+                                class="comparison-slideshow-image" alt="Training efficiency curves">
+                        </div>
+                        <div class="slide">
+                            <img src="qual/qual9.webp"
+                                class="comparison-slideshow-image" alt="Training efficiency curves">
+                        </div>
+                        <div class="slide">
+                            <img src="qual/qual10.webp"
+                                class="comparison-slideshow-image" alt="Training efficiency curves">
+                        </div>
+                        <div class="slide">
+                            <img src="qual/qual11.webp"
+                                class="comparison-slideshow-image" alt="Training efficiency curves">
+                        </div>
 
-<section class="section" id="BibTeX">
-  <div class="container is-max-desktop content">
-    <h2 class="title">BibTeX</h2>
-    <pre><code>
-      @article{ahn2025fine,
+                    </div>
+
+                    <button class="slideshow-nav prev" onclick="changeSlide(-1)">❮</button>
+                    <button class="slideshow-nav next" onclick="changeSlide(1)">❯</button>
+                    
+                    <div class="slideshow-controls">
+                        <button class="play-pause" onclick="togglePlayPause()">
+                            <i class="fa fa-pause"></i>
+                        </button>
+                    </div>
+                </div>
+            </section>
+                
+            <section id="quantitative-results" class="section">
+                <h2>Quantitative Results</h2>
+                <p class="image-caption">As iterations progress, more heads participate in perturbation guidance, <br> leading to noticeable improvements in both style and quality metrics!</p>
+                <div class="image-container">
+                    <div class="image-content">
+                        <img src="img/quan_result.jpg" class="img medium-image" alt="Comparisons diagram">
+                    </div>
+                </div>
+            </section>
+
+            <section id="softpag" class="section">
+                <h2>SoftPAG : Interpolation variant of PAG</h2>
+                <p class="image-caption">PAG [1] provides guidance through identity perturbation, but overly strong perturbations often lead to issues such as oversaturation. To address this, SoftPAG introduces a method to control the strength of perturbation, thereby mitigating such problems</p>
+                <div class="image-container">
+                    <div class="image-content">
+                        <img src="img/interpolation.png" class="img large-image" alt="Comparisons diagram">
+                  </div>
+                </div>
+                <p class="image-caption" style="text-align: left;">[1] Self-Rectifying Diffusion Sampling with Perturbed-Attention Guidance, ECCV2024 </p>
+            </section>
+                
+
+            <div class="citation add-top-padding">
+                <h1 id="citation">Citation</h1>
+                <p> If you use this work or find it helpful, please consider citing: </p>
+                <pre id="codecell0">
+    @article{ahn2025fine,
       title   = {Fine-Grained Perturbation Guidance via Attention Head Selection},
       author  = {Donghoon Ahn and Jiwon Kang and Sanghyun Lee and Minjae Kim and Jaewon Min and Wooseok Jang and Saungwu Lee and Sayak Paul and Susung Hong and Seungryong Kim},
       journal = {arXiv preprint arXiv:2506.10978},
       year    = {2025}
     }
-    </code></pre>
-  </div>
-</section>
-
-
-<footer class="footer">
-  <div class="container">
-    <div class="content has-text-centered">
-      <a class="icon-link" href="https://github.com/cvlab-kaist/HeadHunter" disabled="">
-        <svg class="svg-inline--fa fa-github fa-w-16" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="github" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512" data-fa-i2svg=""><path fill="currentColor" d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path></svg><!-- <i class="fab fa-github"></i> Font Awesome fontawesome.com -->
-      </a>
-    </div>
-    <div class="columns is-centered">
-      <div class="column is-8">
-        <div class="content has-text-centered">
-          <p>
-            Template was borrowed from <a href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>
-          under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
-            Commons Attribution-ShareAlike 4.0 International License</a>.
-          </p>
+                </pre>
+            </div>
         </div>
-      </div>
-    </div>
-  </div>
-</footer>
+    </main>
 
+    <footer class="site-footer">
+        <div class="container">
+            <p class="credit">Credit: The design of this project page is inspired by previous academic project pages, such as <a href="https://cvlab-kaist.github.io/VIRAL/" target="_blank">VIRAL</a>, <a href="https://llm-grounded-diffusion.github.io/" target="_blank">LLM-grounded Diffusion</a> and <a href="https://describe-anything.github.io/" target="_blank">Describe-anything</a>.</p>
+        </div>
+    </footer>
+
+    <script>
+    function toggleMute(element) {
+        const video = element.parentElement.querySelector('video');
+        const icon = element.querySelector('i');
+        const text = element.querySelector('.unmute-text');
+        
+        if (video.muted) {
+            video.muted = false;
+            icon.className = 'fa fa-volume-up';
+            text.textContent = 'Mute';
+        } else {
+            video.muted = true;
+            icon.className = 'fa fa-volume-off';
+            text.textContent = 'Click to unmute';
+        }
+    }
+    
+    document.addEventListener('DOMContentLoaded', function() {
+        const videos = document.querySelectorAll('video');
+        videos.forEach(video => {
+            video.addEventListener('play', function() {
+                const overlay = this.parentElement.querySelector('.unmute-overlay');
+                if (overlay) overlay.style.opacity = '0.8';
+            });
+            
+            video.addEventListener('pause', function() {
+                const overlay = this.parentElement.querySelector('.unmute-overlay');
+                if (overlay) overlay.style.opacity = '0.8';
+            });
+        });
+
+        // Initialize all slideshows
+        document.querySelectorAll('.slideshow-container').forEach(container => {
+            const slideshow = container.querySelector('.slideshow');
+            const slides = slideshow.querySelectorAll('.slide');
+            const prevButton = container.querySelector('.slideshow-nav.prev');
+            const nextButton = container.querySelector('.slideshow-nav.next');
+            const playPauseButton = container.querySelector('.play-pause');
+            
+            let currentSlide = 0;
+            let autoplayInterval;
+            let isPlaying = true;
+
+            function showSlide(n) {
+                slides.forEach(slide => slide.classList.remove('active'));
+                currentSlide = (n + slides.length) % slides.length;
+                slides[currentSlide].classList.add('active');
+            }
+
+            function changeSlide(n) {
+                showSlide(currentSlide + n);
+                resetAutoplay();
+            }
+
+            function togglePlayPause() {
+                if (isPlaying) {
+                    clearInterval(autoplayInterval);
+                    playPauseButton.innerHTML = '<i class="fa fa-play"></i>';
+                } else {
+                    startAutoplay();
+                    playPauseButton.innerHTML = '<i class="fa fa-pause"></i>';
+                }
+                isPlaying = !isPlaying;
+            }
+
+            function startAutoplay() {
+                autoplayInterval = setInterval(() => {
+                    showSlide(currentSlide + 1);
+                }, 5000);
+            }
+
+            function resetAutoplay() {
+                clearInterval(autoplayInterval);
+                if (isPlaying) {
+                    startAutoplay();
+                }
+            }
+
+            // Initialize this slideshow
+            showSlide(0);
+            startAutoplay();
+
+            // Add event listeners
+            prevButton.addEventListener('click', () => changeSlide(-1));
+            nextButton.addEventListener('click', () => changeSlide(1));
+            playPauseButton.addEventListener('click', togglePlayPause);
+        });
+
+        // Handle main video play button
+        const mainVideo = document.querySelector('.main-video');
+        const playButton = document.querySelector('.play-button-overlay');
+        
+        if (mainVideo && playButton) {
+            // Click play button to play video
+            playButton.addEventListener('click', () => {
+                mainVideo.play();
+                mainVideo.classList.add('playing');
+            });
+
+            // Handle video play/pause events
+            mainVideo.addEventListener('play', () => {
+                mainVideo.classList.add('playing');
+            });
+
+            mainVideo.addEventListener('pause', () => {
+                mainVideo.classList.remove('playing');
+            });
+
+            mainVideo.addEventListener('ended', () => {
+                mainVideo.classList.remove('playing');
+            });
+        }
+
+        // -----------------------------
+        // 🖼️ Click-to-zoom Lightbox
+        // -----------------------------
+        // Build overlay once
+        const lightbox = document.createElement('div');
+        lightbox.className = 'lightbox-overlay';
+        lightbox.setAttribute('role', 'dialog');
+        lightbox.setAttribute('aria-modal', 'true');
+        lightbox.innerHTML = '<img alt="Expanded image">';
+        document.body.appendChild(lightbox);
+        const lightboxImg = lightbox.querySelector('img');
+
+        function openLightbox(src, alt) {
+            lightboxImg.src = src;
+            lightboxImg.alt = alt || '';
+            lightbox.classList.add('active');
+            document.body.classList.add('no-scroll');
+        }
+        function closeLightbox() {
+            lightbox.classList.remove('active');
+            document.body.classList.remove('no-scroll');
+            lightboxImg.src = '';
+        }
+
+        // Close on click anywhere or on Esc
+        lightbox.addEventListener('click', closeLightbox);
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && lightbox.classList.contains('active')) closeLightbox();
+        });
+
+        // Mark target images as zoomable and wire up click
+        const zoomableImages = document.querySelectorAll('.image-container img, .slideshow img, .main-content img.img, .hero-section img.img');
+        zoomableImages.forEach(img => {
+            img.classList.add('zoomable');
+            img.addEventListener('click', () => {
+                // support optional high-res source via data-fullsrc
+                const src = img.getAttribute('data-fullsrc') || img.currentSrc || img.src;
+                openLightbox(src, img.alt);
+            });
+        });
+    });
+    </script>
 </body>
 </html>
