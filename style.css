@@ -144,6 +144,9 @@ p {
   flex-wrap: nowrap;
   justify-content: center;
   margin: 2.5rem 0;
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .icon-col {
