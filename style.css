@@ -306,7 +306,7 @@ p {
   width: 70%;
   margin: 0 auto;
   margin-bottom: 1rem;
-  scrollbar-width: thin;
+  scrollbar-width: none;
   scrollbar-color: var(--accent-color) var(--light-bg);
 }
 
