@@ -677,10 +677,12 @@ pre {
     justify-content: flex-start;
     padding: 20px;
     box-sizing: border-box;
+    pointer-events: none;
 }
 
 .slide.active {
     opacity: 1;
+    pointer-events: auto;
 }
 
 .slideshow-image {
@@ -885,8 +887,10 @@ pre {
 /* Remove double border on last vra cell if table ends */
 
 .advantages-table th {
-    background-color: var(--light-bg);
+    /* background-color: var(--light-bg); */
+    background-color: var(--accent-bg-color);
     color: var(--primary-color);
+
 }
 
 

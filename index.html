@@ -331,11 +331,11 @@
 
                     </div>
 
-                    <button class="slideshow-nav prev" onclick="changeSlide(-1)">❮</button>
-                    <button class="slideshow-nav next" onclick="changeSlide(1)">❯</button>
+                    <button class="slideshow-nav prev">❮</button>
+                    <button class="slideshow-nav next">❯</button>
                     
                     <div class="slideshow-controls">
-                        <button class="play-pause" onclick="togglePlayPause()">
+                        <button class="play-pause">
                             <i class="fa fa-pause"></i>
                         </button>
                     </div>
@@ -542,10 +542,10 @@
         const zoomableImages = document.querySelectorAll('.image-container img, .slideshow img, .main-content img.img, .hero-section img.img');
         zoomableImages.forEach(img => {
             img.classList.add('zoomable');
-            img.addEventListener('click', () => {
+            img.addEventListener('click', (e) => {
                 // support optional high-res source via data-fullsrc
-                const src = img.getAttribute('data-fullsrc') || img.currentSrc || img.src;
-                openLightbox(src, img.alt);
+                const src = e.currentTarget.getAttribute('data-fullsrc') || e.currentTarget.currentSrc || e.currentTarget.src;
+                openLightbox(src, e.currentTarget.alt);
             });
         });
     });
