@@ -1,5 +1,5 @@
 <p align="center">
-  <h1 align="center">Fine-Grained Perturbation Guidance via Attention Head Selection</h1>
+  <h1 align="center">Where and How to Perturb: On the Design of Perturbation Guidance in Diffusion and Flow Models</h1>
   <p align="center">
      <a href="https://github.com/sunovivid/">Donghoon Ahn<sup>●</sup></a>
     ·
