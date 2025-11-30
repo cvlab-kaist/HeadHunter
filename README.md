@@ -1,7 +1,7 @@
 # Where and How to Perturb: On the Design of Perturbation Guidance in Diffusion and Flow Models (NeurIPS 2025)
 
 <a href="https://cvlab-kaist.github.io/HeadHunter/"><img src="https://img.shields.io/badge/Project-Page-blue" alt="Project Page"></a>
-<a href="https://arxiv.org/abs/2506.1097"><img src="https://img.shields.io/badge/arXiv-2506.1097-b31b1b.svg" alt="arXiv"></a>
+<a href="https://arxiv.org/abs/2506.10978"><img src="https://img.shields.io/badge/arXiv-2506.1097-b31b1b.svg" alt="arXiv"></a>
 
 **Official PyTorch implementation of "Where and How to Perturb: On the Design of Perturbation Guidance in Diffusion and Flow Models".**
 
