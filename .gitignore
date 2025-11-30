@@ -1,0 +1,5 @@
+wandb/
+__pycache__/
+output_iterative/
+*_test.sh
+*_test.md

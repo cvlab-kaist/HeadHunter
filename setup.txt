@@ -1,0 +1,9 @@
+# Run in 'head_guidance' folder
+conda env create -f headhunter.yaml
+conda activate headhunter
+cd ../diffusers
+pip install -e ".[torch]"
+
+# Please modify 'prompts_style.txt'
+# Please add  <your_wandb_api_key> in run.sh
+# Run 'run.sh'
